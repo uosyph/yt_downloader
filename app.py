@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash
 from dotenv import load_dotenv
-from os import getenv, listdir
+from os import getenv
 from services.mp3 import download_mp3
 from services.mp4 import download_mp4
 
@@ -12,7 +12,6 @@ app.config["SECRET_KEY"] = getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET"])
 def root():
-    print(listdir())
     return render_template("index.html")
 
 
