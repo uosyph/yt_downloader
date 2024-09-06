@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YT Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>YT Downloader</h1>
+
+    {% with msg = get_flashed_messages() %}
+        {% if msg: %}<div class="msg">{{ msg[0] }}</div>{% endif %}
+    {% endwith %}
+    <br><br>
+
+    <form action="{{ url_for('download') }}" method="POST">
+        <label for="url">Video URL:</label>
+        <input type="text" id="url" name="url" required>
+        <br><br>
+
+        <label for="format">Choose format:</label>
+        <select id="format" name="format" required>
+            <option value="mp3">MP3 (Audio)</option>
+            <option value="mp4">MP4 (Video)</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Download</button>
+    </form>
+</body>
+</html>
