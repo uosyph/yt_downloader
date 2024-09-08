@@ -6,6 +6,8 @@
     <title>YT Downloader</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic">
 </head>
 <body>
     <div class="background">
@@ -19,22 +21,25 @@
             <h1>YT Downloader</h1>
 
             {% with msg = get_flashed_messages() %}
-                {% if msg: %}<div class="msg">{{ msg[0] }}</div>{% endif %}
+            {% if msg: %}<div class="msg">{{ msg[0] }}</div>{% endif %}
             {% endwith %}
 
             <form action="{{ url_for('download') }}" method="POST">
-                <label for="url">Video URL:</label>
-                <input type="text" id="url" name="url" required>
-                <br><br>
+                <div class="inputBox">
+                    <input type="text" id="url" name="url" required>
+                    <span class="user">Video URL</span>
+                </div>
 
-                <label for="format">Choose format:</label>
-                <select id="format" name="format" required>
-                    <option value="mp3">MP3 (Audio)</option>
-                    <option value="mp4">MP4 (Video)</option>
-                </select>
-                <br><br>
+                <div class="format-switch">
+                    <p>MP3</p>
+                    <label class="switch">
+                        <input type="checkbox" id="format" name="format">
+                        <span class="slider"></span>
+                    </label>
+                    <p>MP4</p>
+                </div>
 
-                <button type="submit">Download</button>
+                <button class="submit"><span>Download</span></button>
             </form>
         </div>
     </div>
