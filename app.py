@@ -27,10 +27,10 @@ def download():
     video_url = request.form.get("url")
     format_type = request.form.get("format")
 
-    if format_type == "mp3":
+    if format_type is None:
         file_path = download_mp3(video_url)
         flash("Audio downloaded successfully")
-    elif format_type == "mp4":
+    elif format_type == "on":
         file_path = download_mp4(video_url)
         flash("Video downloaded successfully")
 

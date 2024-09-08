@@ -146,10 +146,6 @@ h1 {
 	transition: 0.15s;
 }
 
-input:checked + .slider {
-	background-color: var(--track_active_color);
-}
-
 input:focus-visible + .slider {
 	box-shadow: 0 0 0 2px var(--track_active_color);
 }
