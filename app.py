@@ -1,13 +1,20 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import (
+    Flask,
+    render_template,
+    request,
+    send_file,
+    after_this_request,
+    flash,
+)
+import os
 from dotenv import load_dotenv
-from os import getenv
 from services.mp3 import download_mp3
 from services.mp4 import download_mp4
 
 load_dotenv()
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = getenv("SECRET_KEY")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 
 @app.route("/", methods=["GET"])
@@ -21,14 +28,24 @@ def download():
     format_type = request.form.get("format")
 
     if format_type == "mp3":
-        download_mp3(video_url)
+        file_path = download_mp3(video_url)
         flash("Audio downloaded successfully")
     elif format_type == "mp4":
-        download_mp4(video_url)
+        file_path = download_mp4(video_url)
         flash("Video downloaded successfully")
 
-    return redirect("/")
+    file_location = os.path.join(os.getcwd(), file_path)
+
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove(file_location)
+        except Exception as e:
+            print(f"Error deleting file: {e}")
+        return response
+
+    return send_file(file_location, as_attachment=True)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", port=8008, debug=True)
