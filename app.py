@@ -4,7 +4,6 @@ from flask import (
     request,
     send_file,
     after_this_request,
-    flash,
 )
 import os
 from dotenv import load_dotenv
@@ -29,10 +28,8 @@ def download():
 
     if format_type is None:
         file_path = download_mp3(video_url)
-        flash("Audio downloaded successfully")
     elif format_type == "on":
         file_path = download_mp4(video_url)
-        flash("Video downloaded successfully")
 
     file_location = os.path.join(os.getcwd(), file_path)
 

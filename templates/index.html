@@ -20,10 +20,6 @@
         <div class="form">
             <h1>YT Downloader</h1>
 
-            {% with msg = get_flashed_messages() %}
-            {% if msg: %}<div class="msg">{{ msg[0] }}</div>{% endif %}
-            {% endwith %}
-
             <form action="{{ url_for('download') }}" method="POST">
                 <div class="inputBox">
                     <input type="text" id="url" name="url" required>
