@@ -4,6 +4,8 @@ from flask import (
     request,
     send_file,
     after_this_request,
+    redirect,
+    flash,
 )
 import os
 from dotenv import load_dotenv
@@ -26,10 +28,15 @@ def download():
     video_url = request.form.get("url")
     format_type = request.form.get("format")
 
-    if format_type is None:
-        file_path = download_mp3(video_url)
-    elif format_type == "on":
-        file_path = download_mp4(video_url)
+    try:
+        if format_type is None:
+            file_path = download_mp3(video_url)
+        elif format_type == "on":
+            file_path = download_mp4(video_url)
+    except Exception as e:
+        print(e)
+        flash("Not a valid URL")
+        return redirect("/")
 
     file_location = os.path.join(os.getcwd(), file_path)
 

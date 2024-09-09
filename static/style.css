@@ -28,6 +28,24 @@ h1 {
 	margin-bottom: 60px;
 }
 
+/* ------------------- Message Card ------------------- */
+.msg {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 40px;
+	z-index: 10;
+
+	font-size: 1.1em;
+	padding: 10px 15px;
+	background: rgba(255, 255, 255, 0.16);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(8.9px);
+	-webkit-backdrop-filter: blur(8.9px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 /* ------------------- Video URL ------------------- */
 .inputBox {
 	position: relative;
